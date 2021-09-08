@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 
 /*
@@ -29,13 +30,15 @@ Route::get('/event/edit/deletepic/{id}',[EventController::class,'DeletePic'])->m
 Route::post('/event/update/{id}',[EventController::class,'Update'])->middleware('auth');
 Route::get('/event/delete/{id}',[EventController::class,'Delete'])->middleware('auth');
 Route::post('/event/addpic',[EventController::class,'AddPic'])->name('add.pic')->middleware('auth');
+Route::get('/manage/user',[UserController::class,'AllUser'])->name('all.user')->middleware('auth');
 
-
+Route::get('/manage/user/role/{id}',[UserController::class,'EditRole'])->middleware('auth');
+Route::get('/event/user/delete/{id}',[EventController::class,'DeleteUser'])->middleware('auth');
 
 Route::get('/profile',[HomeController::class,'index'])->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users = User::all();
-    return view('dashboard',compact('users'));
+    return view('admin.admin_master',compact('users'));
 })->name('dashboard');

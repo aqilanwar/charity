@@ -20,7 +20,9 @@
                     <x-jet-nav-link href="{{ route('all.event') }}" :active="request()->routeIs('all.event')">
                         {{ __('Manage Event') }}
                     </x-jet-nav-link>
-
+                    <x-jet-nav-link href="{{ route('all.user') }}" :active="request()->routeIs('all.user')">
+                        {{ __('Manage User') }}
+                    </x-jet-nav-link>
                 @endif
 
 
