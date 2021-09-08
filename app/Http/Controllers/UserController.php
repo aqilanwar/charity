@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function AllUser(){
         $users = User::latest()->paginate(10);
-        return view('admin.event.manageuser', compact ('users'));    
+        return view('admin.user.user', compact ('users'));    
     }
 
     public function EditRole(){
