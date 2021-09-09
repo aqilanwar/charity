@@ -7,12 +7,12 @@ use Auth;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-
+use App\DataTables\StudentDataTable;
 
 class UserController extends Controller
 {
     public function AllUser(){
-        $users = User::latest()->paginate(10);
+        $users = User::latest()->paginate(5);
         return view('admin.user.user', compact ('users'));    
     }
 
