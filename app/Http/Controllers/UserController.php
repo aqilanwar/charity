@@ -26,7 +26,8 @@ class UserController extends Controller
     }
 
     public function DeleteUser(){
-        $users = User::latest()->paginate(10);
-        return view('admin.event.manageuser', compact ('users'));    
+        $users = User::query()->where('id',$id)->get();
+        dd($users->profile_photo_path);
+        return Redirect()->back()->with('deletepic' , 'Picture deleted successfully!'); 
     }
 }
