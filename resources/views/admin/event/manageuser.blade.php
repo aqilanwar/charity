@@ -8,12 +8,12 @@
     <div class="container" style="margin-top:20px;">
         <div class="row">
             <div class="col-md">
-                {{-- @if(session('success')) 
+                @if(session('success')) 
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{session('success')}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                @endif --}}
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h1>User</h1>

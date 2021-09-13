@@ -21,13 +21,38 @@
                     </button>
                 </div>    
             @endif
+
+            @error('event_date')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ $message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>    
+            @enderror
+            @error('event_place')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ $message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>    
+            @enderror
+            @error('event_picture.*')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ $message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>    
+            @enderror
             <h5 class="card-header d-flex justify-content-between align-items-center">
                 List of event from all organizer
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Create new event
                 </button>
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -38,41 +63,59 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
+                        
                         <div class="modal-body">
-                          <form>
-                            <div class="form-group">
-                              <label for="recipient-name" class="col-form-label">Event title </label>
-                              <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                              <label for="recipient-name" class="col-form-label">Event date </label>
-                              <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                              <label for="recipient-name" class="col-form-label">Event place </label>
-                              <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                              <label for="message-text" class="col-form-label">Event description</label>
-                              <textarea class="form-control" id="message-text"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="custom-file">
-                                  <input type="file" name="event_picture[]" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" multiple="multiple" required>
-                                  <label class="custom-file-label" for="inputGroupFile04">Event picture/poster</label>
+                            <form action="{{ route('add.event') }}" method="POST" enctype="multipart/form-data" required>
+                                @csrf
+                                <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Event title </label>
+                                <input type="text" name="event_title" class="form-control" id="recipient-name" required>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Event date </label>
+                                <input type="date" id="demo" name="event_date" class="form-control datepicker" required>
+                                </div>
+
+                                <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Event place </label>
+                                <input type="text" name="event_place" class="form-control" id="recipient-name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="message-text" class="col-form-label">Event description</label>
+                                <textarea class="form-control" name="event_description" id="message-text" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                        <input name="event_picture[]" class="form-control" type="file" id="formFileMultiple" multiple required>
+                                    </div>                            
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-warning">Reset</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Create event</button>
+                                </div>
                           </form>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Create event</button>
-                        </div>
+
                       </div>
                     </div>
-                  </div>
+                </div>
             </h5>
-
+            <br>
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-lg-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -65,6 +65,7 @@ class EventController extends Controller
                 ]);
             }    
         }
+        
         return Redirect()->back()->with('success' , 'Event created successfully!');
     }
 
