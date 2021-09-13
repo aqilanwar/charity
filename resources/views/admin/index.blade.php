@@ -47,6 +47,8 @@
                     @yield('user')
                 @elseif (request()->is('dashboard'))
                     @yield('dashboard')
+                @elseif (request()->is('event/all'))
+                    @yield('event')
                 @endif
 
 

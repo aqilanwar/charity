@@ -37,6 +37,5 @@ Route::get('/event/user/delete/{id}',[EventController::class,'DeleteUser'])->mid
 
 Route::get('/profile',[HomeController::class,'index'])->middleware('auth');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('admin.index');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[UserController::class,'Dashboard'])->name('dashboard');
+

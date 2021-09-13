@@ -23,7 +23,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Admin 
+                MANAGE 
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -31,6 +31,11 @@
                 <a class="nav-link" href="{{ route('all.user') }}">
                     <i class="fas fa-fw fa-user-alt"></i>
                     <span>Manage User</span></a>
+            </li>
+            <li class="{{ (request()->is('event/all')) ? 'nav-item active' : 'nav-item' }}">
+                <a class="nav-link" href="{{ route('all.event') }}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Manage Event</span></a>
             </li>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">

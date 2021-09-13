@@ -11,8 +11,12 @@ use App\DataTables\StudentDataTable;
 
 class UserController extends Controller
 {
+
+    public function Dashboard(){
+        return view('admin.user.dashboard');
+    }
     public function AllUser(){
-        $users = User::latest()->paginate(5);
+        $users = User::latest()->paginate(3);
         return view('admin.user.user', compact ('users'));    
     }
 
