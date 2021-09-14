@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('dashboard')
+@section('content')
 
 <div class="container-fluid">
     <!-- Page Heading -->

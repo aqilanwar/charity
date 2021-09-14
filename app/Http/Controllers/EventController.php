@@ -73,7 +73,7 @@ class EventController extends Controller
     public function Edit($id){
         $events = Event::query()->first();
         $eventpic = EventPic::where('event_id',$id)->paginate(3);
-        return view('admin.event.edit' , compact('events' , 'eventpic')); 
+        return view('admin.user.event-manage' , compact('events' , 'eventpic')); 
     }
     
     public function Update(Request $request,$id){

@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('user')
+@section('content')
     
     <!-- Begin Page Content -->
     <div class="container-fluid">

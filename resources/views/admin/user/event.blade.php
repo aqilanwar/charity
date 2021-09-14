@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('event')
+@section('content')
     
     <!-- Begin Page Content -->
     <div class="container-fluid">

@@ -42,18 +42,7 @@
             <div id="content">
                 @include('admin.layout.navbar')
                 <!-- Begin Page Content -->
-
-                @if (request()->is('manage/user'))
-                    @yield('user')
-                @elseif (request()->is('dashboard'))
-                    @yield('dashboard')
-                @elseif (request()->is('event/all'))
-                    @yield('event')
-                @endif
-
-
-                
-
+                @yield('content')
             </div>
             <!-- End of Main Content -->
 
