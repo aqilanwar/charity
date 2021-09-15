@@ -105,7 +105,7 @@ class EventController extends Controller
             unlink($img->photo_path);
             EventPic::find($id)->forceDelete();
         }
-        return Redirect()->back()->with('deletepic' , 'Picture deleted successfully!');
+        return Redirect()->back()->with('successpic' , 'Picture deleted successfully!');
     }
     
     

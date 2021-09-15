@@ -73,11 +73,11 @@
                             @endforeach
 
                         </tbody>
-                        <div class="card-footer">
-                            {{ $users->links("pagination::bootstrap-4") }}
-                        </div>
                     </table>
                 </div>
+            </div>
+            <div class="card-footer">
+                {{ $users->links("pagination::bootstrap-4") }}
             </div>
 
         </div>

@@ -14,43 +14,91 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card shadow mb-4">
+                    @if(session('success')) 
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>    
+                    @endif
+                    @error('event_date')
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>    
+                    @enderror
+                    @error('event_place')
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>    
+                    @enderror
 
                     <h5 class="card-header d-flex justify-content-between align-items-center">
-                        Edit event detail
+                        Edit event detail 
+                        <span class="badge badge-pill badge-primary">
+                            Created at : {{$events->created_at->toFormattedDateString()}}
+                        </span>
+
                         <!-- Button trigger modal -->
                     </h5>
         
                     <div class="card-body">
                         <form action="{{ url('event/update/'.$events->id)}}" method="POST" >
+                            @csrf
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Event title</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$events->event_title}}">
+                              <input type="text" name="event_title" class="form-control" id="exampleFormControlInput1" value="{{$events->event_title}}">
                             </div>
                             @error('event_title')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                             <div class="form-group">
                               <label for="exampleFormControlTextarea1">Event description</label>
-                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >{{$events->event_description}}</textarea>
+                              <textarea class="form-control" name="event_description" id="exampleFormControlTextarea1" rows="3" >{{$events->event_description}}</textarea>
                             </div>
 
                             <div class="form-group">
                               <label for="exampleFormControlTextarea1">Event place</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$events->event_place}}">
+                              <input type="text" name="event_place" class="form-control" id="exampleFormControlInput1" value="{{$events->event_place}}">
                             </div>
 
                             <div class="form-group">
                                 <label for="Event Date" class="form-label">Event Date</label>
-                                <input type="date" class="form-control" value="{{$events->event_date}}" name="event_date" id="event_date" required>
+                                <input type="date" id="demo" class="form-control" value="{{$events->event_date}}" name="event_date" id="event_date" required>
                             </div>
-                          </form>
                     </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                    </div>
+                </form>
+
         
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="card shadow mb-4">
-
+            <div class="col-md-8" >
+                <div class="card shadow mb-4 ">
+                    @if(session('successpic')) 
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{session('successpic')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>    
+                    @endif
+                    @error('event_picture.*')
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>    
+                    @enderror
                     <h5 class="card-header d-flex justify-content-between align-items-center">
                         Image of event
                         <!-- Button trigger modal -->
@@ -70,37 +118,21 @@
                                 </div>
                                 
                                 <div class="modal-body">
-                                    <form action="{{ route('add.event') }}" method="POST" enctype="multipart/form-data" required>
+                                    <form action="{{ route('add.pic') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Event title </label>
-                                        <input type="text" name="event_title" class="form-control" id="recipient-name" required>
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Event date </label>
-                                        <input type="date" id="demo" name="event_date" class="form-control datepicker" required>
-                                        </div>
-        
-                                        <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Event place </label>
-                                        <input type="text" name="event_place" class="form-control" id="recipient-name" required>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                        <label for="message-text" class="col-form-label">Event description</label>
-                                        <textarea class="form-control" name="event_description" id="message-text" required></textarea>
-                                        </div>
-                                        <div class="form-group">
                                             <div class="mb-3">
-                                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                                <label for="formFileMultiple" class="form-label">Select the picture for your event</label>
                                                 <input name="event_picture[]" class="form-control" type="file" id="formFileMultiple" multiple required>
                                             </div>                            
                                         </div>
-                                        
+                                        <div class="mb-3">
+                                            <input name="event_id" value="{{$events->id}}" hidden>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="reset" class="btn btn-warning">Reset</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Create event</button>
+                                            <button type="submit" class="btn btn-primary">Upload Image</button>
                                         </div>
                                   </form>
                                 </div>
@@ -142,57 +174,22 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <div class="card-footer">
-                                    {{ $eventpic->links() }}
-                                </div>
                             </table>
                         </div>
                     </div>
-        
+                    <div class="card-footer">
+                        {{ $eventpic->links("pagination::bootstrap-4") }}
+                    </div>
+                    
                 </div>
             </div>
         </div>
         
         <div class="card shadow mb-4">
-            @if(session('success')) 
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{session('success')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>    
-            @endif
 
-            @error('event_date')
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ $message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>    
-            @enderror
-            @error('event_place')
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ $message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>    
-            @enderror
-            @error('event_picture.*')
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ $message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>    
-            @enderror
             <h5 class="card-header d-flex justify-content-between align-items-center">
-                List of event from all organizer
+                List of people that join the event
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Create new event
-                </button>
             </h5>
             <br>
             <form class="d-none d-sm-inline-block form-inline mr-auto ml-lg-3 my-2 my-md-0 mw-100 navbar-search">
@@ -254,7 +251,6 @@
                         </tbody>
                         <div class="card-footer">
 
-                            {{-- {{ $events->links("pagination::bootstrap-4") }} --}}
                         </div>
                     </table>
                 </div>

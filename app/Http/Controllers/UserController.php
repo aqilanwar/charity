@@ -7,7 +7,6 @@ use Auth;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use App\DataTables\StudentDataTable;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
         return view('admin.user.dashboard');
     }
     public function AllUser(){
-        $users = User::latest()->paginate(3);
+        $users = User::latest()->paginate(10);
         return view('admin.user.user', compact ('users'));    
     }
 
@@ -28,6 +27,6 @@ class UserController extends Controller
     public function DeleteUser(){
         $users = User::query()->where('id',$id)->get();
         dd($users->profile_photo_path);
-        return Redirect()->back()->with('deletepic' , 'Picture deleted successfully!'); 
+        return Redirect()->back()->with('successpic' , 'Picture deleted successfully!'); 
     }
 }
