@@ -14,8 +14,18 @@ class EventController extends Controller
 {
     
     public function AllEvent(){
-        $events = Event::latest()->paginate(3);
-        return view('admin.user.event', compact ('events'));    
+
+        if(auth()->user()->role_id == 2){
+            $events = Event::latest()->paginate(3);
+            return view('admin.user.event', compact ('events'));    
+        }
+        elseif(auth()->user()->role_id == 1){
+            $events = Event::where('user_id',auth()->user()->id)->paginate(3);
+            return view('admin.user.event', compact ('events'));   
+        }else{
+            abort(403);
+        }
+
     }
 
     public function AddEvent(Request $request){
@@ -71,7 +81,8 @@ class EventController extends Controller
 
    
     public function Edit($id){
-        $events = Event::query()->first();
+        
+        $events = Event::find($id);
         $eventpic = EventPic::where('event_id',$id)->paginate(3);
         return view('admin.user.event-manage' , compact('events' , 'eventpic')); 
     }

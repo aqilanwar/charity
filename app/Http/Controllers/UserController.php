@@ -29,4 +29,9 @@ class UserController extends Controller
         dd($users->profile_photo_path);
         return Redirect()->back()->with('successpic' , 'Picture deleted successfully!'); 
     }
+    
+    public function Logout(){
+        Auth::logout();
+        return Redirect()->route('login')->with('success' , 'You have successfully logout !');
+    }
 }

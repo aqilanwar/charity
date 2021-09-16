@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +35,6 @@ Route::get('/manage/user/role/{id}',[UserController::class,'EditRole'])->middlew
 Route::get('/event/user/delete/{id}',[EventController::class,'DeleteUser'])->middleware('auth');
 
 Route::get('/profile',[HomeController::class,'index'])->middleware('auth');
-
+Route::get('/user/logout',[UserController::class,'Logout'])->name('logout');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[UserController::class,'Dashboard'])->name('dashboard');
 
