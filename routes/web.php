@@ -16,9 +16,7 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'Home'])->name('/');
 
 
 // Event Controller

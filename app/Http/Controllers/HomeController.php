@@ -22,4 +22,8 @@ class HomeController extends Controller
         }
 
     }
+
+    public function Home(){
+        return view('frontview.master'); 
+    }
 }
