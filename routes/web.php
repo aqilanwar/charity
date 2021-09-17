@@ -15,8 +15,10 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Front View Controller
 Route::get('/',[HomeController::class,'Home'])->name('/');
+Route::get('/event',[HomeController::class,'ListEvent'])->name('list.event');
+
 
 
 // Event Controller
