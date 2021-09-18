@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\EventPic;
+
 
 
 class HomeController extends Controller
@@ -25,8 +27,8 @@ class HomeController extends Controller
     }
 
     public function Home(){
-        $events = Event::latest()->paginate(3);
-        return view('frontview.event.event-list', compact ('events'));   
+        $result = Event::query()->get()->paginate(10);
+        return view('frontview.event.event-list', compact ('result'));   
     }
 
     public function ListEvent(){

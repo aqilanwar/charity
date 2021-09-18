@@ -36,10 +36,10 @@
           </div>
           <div class="card-body">
             <div class="container">
-              @foreach ($events as $event)                   
+              @foreach ($result as $event)                   
               <div class="row">
                 <div class="col-md-3">
-                  <img  class="img-fluid" src="assets/img/team-1.jpg" alt="">
+                  <img  class="img-fluid" src="{{$event->eventpic->photo_path}}" alt="">
                 </div>
                 <div class="col-md-9">
                     <h1 class="text-left font-weight-bold">
@@ -49,9 +49,9 @@
                       {{$event->event_description}}
                     </h5>
                     <p class="text-left font-italic">
-                      Created By : admin@gmail.com
+                      Created By : {{$event->user->email}}
                       <br>
-                      Posted On : {{$event->created_at->diffForHumans()}}
+                      {{-- Posted On : {{$event->created_at->diffForHumans()}} --}}
                     </p>
                 </div>
                 <br>

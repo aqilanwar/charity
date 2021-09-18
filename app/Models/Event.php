@@ -25,7 +25,7 @@ class Event extends Model
     }
     //Create relation from eventpic table to event table
     public function eventpic() {
-        return $this->hasMany(EventPic::class , 'id' ,'event_id');
+        return $this->hasOne(EventPic::class , 'event_id' ,'id');
     }
 
 }
