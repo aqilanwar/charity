@@ -1,4 +1,5 @@
 @extends('frontview.master')
+@section('title', 'Event')
 
 @section('content')
     
@@ -22,24 +23,30 @@
       <div class="container">
         <div class="card text-center">
           <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li>
-            </ul>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                </div>
+                <input type="text" class="form-control" placeholder="Search.." aria-label="Username" aria-describedby="basic-addon1">
+              </div>
           </div>
           <div class="card-body">
-            <div class="container">
+            <div class="container" style="min-height:70vh">
               @foreach ($result as $event)                   
               <div class="row">
                 <div class="col-md-3">
-                  <img  class="img-fluid" src="{{$event->eventpic->photo_path}}" alt="">
+                  <div class="portfolio-details-slider swiper-container">
+                    <div class="swiper-wrapper align-items-center">
+                      @foreach($event->eventpic as $key=>$pic)
+                        <div class="swiper-slide">
+                          <img class="img-fluid"  src="{{$pic->photo_path}}" alt="">
+                        </div>
+                      @endforeach
+                    </div>
+                    @if($key > 1)
+                      <div class="swiper-pagination"></div>
+                    @endif
+                </div>
+                  
                 </div>
                 <div class="col-md-9">
                     <h1 class="text-left font-weight-bold">
@@ -49,18 +56,22 @@
                       {{$event->event_description}}
                     </h5>
                     <p class="text-left font-italic">
-                      Created By : {{$event->user->email}}
+                      Created By : {{$event->user->name}}
                       <br>
-                      {{-- Posted On : {{$event->created_at->diffForHumans()}} --}}
+                      Posted On : {{$event->created_at->diffForHumans()}}
                     </p>
                 </div>
                 <br>
-                <button type="button" class="btn btn-primary">View Event</button>
-              </div>
+                <a type="button" href="{{ url('event/'.$event->id)}}" class="btn btn-primary">View Event</a>
+            </div>
               <hr>
               @endforeach   
+              
             </div>
-          </div>
+        </div>
+        <div class="card-footer">
+            {{ $result->links("pagination::bootstrap-4") }}
+        </div>
         </div>
       </div>
     </section>

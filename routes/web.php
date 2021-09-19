@@ -18,6 +18,7 @@ use App\Models\User;
 //Front View Controller
 Route::get('/',[HomeController::class,'Home'])->name('/');
 Route::get('/event',[HomeController::class,'ListEvent'])->name('list.event');
+Route::get('/event/{id}',[HomeController::class,'ViewEvent']);
 
 
 

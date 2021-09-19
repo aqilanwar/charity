@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\EventPic;
+use Illuminate\Support\Carbon;
 
 
 
@@ -27,11 +28,16 @@ class HomeController extends Controller
     }
 
     public function Home(){
-        $result = Event::query()->get()->paginate(10);
-        return view('frontview.event.event-list', compact ('result'));   
+        return view('frontview.home');   
     }
 
     public function ListEvent(){
-        return view('frontview.event-list', compact ('events'));   
+        $result = Event::latest()->paginate(2);
+        return view('frontview.event.event-list', compact ('result'));   
+    }
+
+    public function ViewEvent($id){
+        $events = Event::find($id);
+        return view('frontview.event.event-view', compact ('events'));   
     }
 }

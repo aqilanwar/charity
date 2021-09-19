@@ -1,26 +1,7 @@
-@extends('frontview.home')
-@section('content')
-      <!-- ======= hero Section ======= -->
-  <section id="hero">
-    <div class="hero-content" data-aos="fade-up">
-      <h2>We rise by lifting <br>others!<span style=" font-style: italic;">#IIUMCare</span> </h2>
+@extends('frontview.master')
+@section('title', 'Home')
 
-      <div>
-        <a href="#about" class="btn-get-started scrollto">View Upcoming Charity Events</a>
-        <a href="#portfolio" class="btn-projects scrollto">Donate</a>
-      </div>
-    </div>
-    <div class="hero-slider swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/1.jpg');"></div>
-            <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/2.jpg');"></div>
-            <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/3.jpg');"></div>
-            <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/4.jpg');"></div>
-            <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/5.jpg');"></div>
-        </div>
-    </div>
-    
-</section>
+@section('content')
   <!-- ======= hero Section ======= -->
   <section id="hero">
     <div class="hero-content" data-aos="fade-up">
@@ -34,11 +15,11 @@
 
     <div class="hero-slider swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/1.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/2.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/3.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/4.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/5.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/1.jpg');" loading="lazy"></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/2.jpg');" loading="lazy"></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/3.jpg');" loading="lazy"></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/4.jpg');" loading="lazy"></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/5.jpg');" loading="lazy"></div>
       </div>
     </div>
 
@@ -50,7 +31,7 @@
       <div class="container" data-aos="fade-up">
         <div class="row">
           <div class="col-lg-6 about-img">
-            <img src="assets/img/about-img.jpg" alt="">
+            <img src="{{asset('frontview/assets/img/about-img.jpg')}}" loading="lazy" alt="">
           </div>
 
           <div class="col-lg-6 content">

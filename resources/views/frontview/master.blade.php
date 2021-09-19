@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>IIUM CHARITY</title>
+  <title>IIUM CHARITY : : @yield('title')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('frontview/assets/img/favicon.png')}}" rel="icon">
-  <link href="{{asset('frontview/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="icon">
+  <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
