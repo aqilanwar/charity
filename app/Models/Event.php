@@ -18,6 +18,7 @@ class Event extends Model
         'event_picture.*',
 
     ];
+    protected $dates = ['event_date'];
 
     //Create relation from user table to event table
     public function user() {

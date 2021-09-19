@@ -10,10 +10,6 @@
 
         <div class="d-flex justify-content-between align-items-center">
           <h2>Upcoming Events</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Upcoming Events</li>
-          </ol>
         </div>
 
       </div>

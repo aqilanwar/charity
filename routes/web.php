@@ -24,7 +24,7 @@ Route::get('/event/{id}',[HomeController::class,'ViewEvent']);
 
 // Event Controller
 Route::post('/event/add',[EventController::class,'AddEvent'])->name('add.event')->middleware('auth');
-Route::get('/event/all',[EventController::class,'AllEvent'])->name('all.event')->middleware('auth');
+Route::get('/manage/event',[EventController::class,'AllEvent'])->name('all.event')->middleware('auth');
 Route::get('/event/edit/{id}',[EventController::class,'Edit'])->middleware('auth');
 Route::get('/event/edit/deletepic/{id}',[EventController::class,'DeletePic'])->middleware('auth');
 Route::post('/event/update/{id}',[EventController::class,'Update'])->middleware('auth');

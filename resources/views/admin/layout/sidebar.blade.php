@@ -3,7 +3,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('/')}}">
                 <div class="sidebar-brand-text mx-3">IIUM CHARITY</div>
             </a>
 
@@ -32,7 +32,7 @@
                     <i class="fas fa-fw fa-user-alt"></i>
                     <span>Manage User</span></a>
             </li>
-            <li class="{{ (request()->is('event/all')) ? 'nav-item active' : 'nav-item' }}">
+            <li class="{{ (request()->is('manage/event')) ? 'nav-item active' : 'nav-item' }}">
                 <a class="nav-link" href="{{ route('all.event') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Manage Event</span></a>

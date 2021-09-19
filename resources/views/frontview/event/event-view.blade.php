@@ -5,15 +5,16 @@
 <main id="main">
 
     <!-- ======= Portfolio Details Section ======= -->
+
     <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
+      <div class="container" style="min-height: 80vh">
         <div class="row gy-4">
           <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper-container">
-              <div class="swiper-wrapper align-items-center">
+            <div class="portfolio-details-slider swiper-container ">
+              <div class="swiper-wrapper align-items-center ">
                 @foreach($events->eventpic as $pic)
                 <div class="swiper-slide">
-                  <img src="../{{$pic->photo_path}}" alt="">
+                  <img style="max-height:70vh" src="../{{$pic->photo_path}}" alt="">
                 </div>
                 @endforeach
               </div>
@@ -23,18 +24,17 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Project information</h3>
+              <h3>{{$events->event_title}}</h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Event Date</strong>: {{$events->event_date->diffForHumans()}}</li>
+                <li><strong>Event Place</strong>: {{$events->event_place}}</li>
+                <li><strong>Created By</strong>: {{$events->user->name}}</li>
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
+              <h2>Event Description</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                  {{$events->event_description}}
               </p>
             </div>
           </div>
