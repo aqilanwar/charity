@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  <link href="{{asset('frontview/assets/vendor/extend.css')}}" rel="stylesheet">
   <link href="{{asset('frontview/assets/vendor/aos/aos.css')}}" rel="stylesheet">
   <link href="{{asset('frontview/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('frontview/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">

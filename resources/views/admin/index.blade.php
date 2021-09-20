@@ -10,8 +10,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>IIUM CHARITY @yield('title')</title>
-
+    <title>IIUM CHARITY : : @yield('title')</title>
+    <!-- Favicons -->
+    <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="icon">
+    <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="apple-touch-icon">
     <!-- Custom fonts for this template-->
     <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
@@ -50,7 +52,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; IIUM CHARITY 2021</span>
                     </div>
                 </div>
             </footer>

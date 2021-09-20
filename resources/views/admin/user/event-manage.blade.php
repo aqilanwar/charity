@@ -1,4 +1,6 @@
 @extends('admin.index')
+@section('title' , 'Manage Event')
+
 @section('content')
     
     <!-- Begin Page Content -->

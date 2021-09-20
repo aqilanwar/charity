@@ -1,4 +1,6 @@
 @extends('admin.index')
+@section('title' , 'Manage Event')
+
 @section('content')
     
     <!-- Begin Page Content -->
@@ -135,7 +137,7 @@
                             <tr>
                                 <td>{{$events->firstItem()+$loop->index}}</td>
                                 <td>{{$event->event_title}}</td>
-                                <td>{{$event->event_date}}</td>
+                                <td>{{$event->event_date->diffForHumans()}}</td>
                                 <td>{{$event->created_at->diffForHumans()}}</td>
                                 <td>                                    
                                 @if($event->user->profile_photo_path == null)
@@ -163,11 +165,11 @@
                             @endforeach
 
                         </tbody>
-                        <div class="card-footer">
-
-                            {{ $events->links("pagination::bootstrap-4") }}
-                        </div>
                     </table>
+                    <div class="card-footer">
+
+                        {{ $events->links("pagination::bootstrap-4") }}
+                    </div>
                 </div>
             </div>
 

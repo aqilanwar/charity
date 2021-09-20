@@ -28,11 +28,12 @@ class HomeController extends Controller
     }
 
     public function Home(){
-        return view('frontview.home');   
+        $result = Event::latest()->limit(4)->get();
+        return view('frontview.home' , compact('result'));   
     }
 
     public function ListEvent(){
-        $result = Event::latest()->paginate(2);
+        $result = Event::latest()->paginate(3);
         return view('frontview.event.event-list', compact ('result'));   
     }
 

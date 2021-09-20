@@ -15,62 +15,63 @@
       </div>
     </section><!-- End Breadcrumbs Section -->
 
-    <section class="inner-page pt-4">
-      <div class="container">
-        <div class="card text-center">
-          <div class="card-header">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                </div>
-                <input type="text" class="form-control" placeholder="Search.." aria-label="Username" aria-describedby="basic-addon1">
-              </div>
-          </div>
-          <div class="card-body">
-            <div class="container" style="min-height:70vh">
-              @foreach ($result as $event)                   
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="portfolio-details-slider swiper-container">
-                    <div class="swiper-wrapper align-items-center">
-                      @foreach($event->eventpic as $key=>$pic)
-                        <div class="swiper-slide">
-                          <img class="img-fluid"  src="{{$pic->photo_path}}" alt="">
+    <div class="container">
+      <div class="container-fluid mt-100">
+        <div class="d-flex flex-wrap justify-content-between">
+            <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header pl-0 pr-0">
+                <div class="row no-gutters w-100 align-items-center">
+                    <div class="col ml-3">Event Title</div>
+                    <div class="col-4 text-muted">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-8">Organizer / Created At</div>
                         </div>
-                      @endforeach
                     </div>
-                    @if($key > 1)
-                      <div class="swiper-pagination"></div>
-                    @endif
                 </div>
-                  
-                </div>
-                <div class="col-md-9">
-                    <h1 class="text-left font-weight-bold">
-                      {{$event->event_title}}
-                    </h1>
-                    <h5 class="text-left">
-                      {{$event->event_description}}
-                    </h5>
-                    <p class="text-left font-italic">
-                      Created By : {{$event->user->name}}
-                      <br>
-                      Posted On : {{$event->created_at->diffForHumans()}}
-                    </p>
-                </div>
-                <br>
-                <a type="button" href="{{ url('event/'.$event->id)}}" class="btn btn-primary">View Event</a>
             </div>
-              <hr>
-              @endforeach   
-              
+            {{-- Event Div --}}
+            @foreach ($result as $event)
+              <div class="card-body py-3">
+                <div class="row no-gutters align-items-center">
+                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">{{$event->event_title}}</a> 
+                        <div class="text-muted small mt-1">{{$event->event_date->format('d M Y')}} &nbsp;·&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">{{$event->event_place}}</a></div>                        
+                      <div class="mt-3">
+                        <div class="col-md-5">
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                          <div class="mt-1"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-none d-md-block col-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="media col-8 align-items-center"> <img src="/storage/{{$event->user->profile_photo_path}}" alt="" style="height: 4rem;width: 4rem;border-radius: 50%;">
+                                <div class="media-body flex-truncate ml-2">
+                                    <div class="line-height-1 text-truncate">{{$event->created_at->diffForHumans()}}</div> <a href="javascript:void(0)" class="text-muted small text-truncate" data-abc="true">by {{$event->user->name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <hr class="m-0">
+            @endforeach
+            
+            {{-- End Event Div --}}
+
         </div>
-        <div class="card-footer">
-            {{ $result->links("pagination::bootstrap-4") }}
-        </div>
-        </div>
-      </div>
-    </section>
+        <nav>
+            <ul class="pagination mb-5">
+              {{ $result ->links("pagination::bootstrap-4") }}
+            </ul>
+        </nav>
+    </div>
+    </div>
+  
 
   </main><!-- End #main -->
 
