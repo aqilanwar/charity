@@ -69,8 +69,8 @@
                 @endforeach
                 <img src="{{$pic->photo_path}}" class="img-fluid" alt="">
                 <h3 class="text-left">{{$event->event_title}}</h3>
-                <h4 class="text-left">
-                  {{$event->event_description}}
+                <h4 class="text-left" style="text-overflow: ellipsis;">
+                  {{$event->event_date->diffForHumans()}}
                 </h4>
                 <div class="mt-3">
                   <div class="progress">
@@ -79,7 +79,7 @@
                   <div class="mt-1"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
                 </div>
                 <div class="mt-1">
-                  <button class="btn btn-primary">View Event</button>
+                  <a href="{{url('event/'.$event->id)}}" class="btn btn-primary btn-block">View Event</a>
                 </div>
               </div>
             </div>

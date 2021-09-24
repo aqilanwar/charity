@@ -35,7 +35,7 @@
             @foreach ($result as $event)
               <div class="card-body py-3">
                 <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">{{$event->event_title}}</a> 
+                    <div class="col"> <a href="{{ url('event/'.$event->id)}}" class="text-big" data-abc="true">{{$event->event_title}}</a> 
                         <div class="text-muted small mt-1">{{$event->event_date->format('d M Y')}} &nbsp;·&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">{{$event->event_place}}</a></div>                        
                       <div class="mt-3">
                         <div class="col-md-5">
