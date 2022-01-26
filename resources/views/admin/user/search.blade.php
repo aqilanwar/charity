@@ -8,7 +8,6 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Manage User</h1>
-        <!-- DataTales Example -->
         <div class="card shadow mb-4">
             @if(session('success')) 
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,8 +17,8 @@
                     </button>
                 </div>    
             @endif
-            <h5 class="card-header d-flex justify-content-between align-items-center">
-                List of all user
+            <h5 class="card-header d-flex align-items-center">
+                Search result for "{{$_GET['search_user']}}" .<a href="{{ url('manage/user') }}">  Go back to all user </a> 
             </h5>
             <br>
             <form action="{{route('search.user')}}" method="GET">
@@ -32,6 +31,11 @@
                         </div>
                 </div>
             </form>
+            @if($users->isEmpty())
+            <div class="card-body">
+                <p>No result.</p>
+            </div>
+            @else
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -48,9 +52,12 @@
                         </thead>
 
                         <tbody>
+                            @php
+                                $i = 1 ;   
+                            @endphp
                             @foreach($users as $user) 
                             <tr>
-                                <td>{{$users->firstItem()+$loop->index}}</td>
+                                <td> {{$i++}} </td>
                                 <td>
                                     @if($user->profile_photo_path == null)
                                         <img style="height: 2rem;width: 2rem;border-radius: 50%;" src="/storage/profile-photos/default.png " alt="">{{$user->name}}
@@ -87,7 +94,7 @@
                                         </span>
                                         <span class="text">Change Role</span>
                                     </a>
-                                    <a href="{{ url('manage/user/delete/'.$user->id)}}" class="btn btn-danger btn-icon-split delete-confirm" >
+                                    <a href="{{ url('manage/user/delete/'.$user->id)}}" class="btn btn-danger btn-icon-split delete-confirm">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>
@@ -150,9 +157,8 @@
                     </table>
                 </div>
             </div>
-            <div class="card-footer">
-                {{ $users->links("pagination::bootstrap-4") }}
-            </div>
+            @endif
+           
 
         </div>
     <!-- /.container-fluid -->
@@ -190,3 +196,4 @@
 
     </script> 
 @endsection
+

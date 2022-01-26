@@ -15,6 +15,7 @@ class Event extends Model
         'event_description',
         'event_date',
         'event_place',
+        'event_max',
         'event_picture.*',
 
     ];

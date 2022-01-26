@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\EventPic;
+use App\Models\Join;
+use App\Models\Donation;
 use Auth;
 use Illuminate\Support\Carbon;
 use App\Models\User;
@@ -16,11 +18,11 @@ class EventController extends Controller
     public function AllEvent(){
 
         if(auth()->user()->role_id == 2){
-            $events = Event::latest()->paginate(3);
+            $events = Event::latest()->paginate(20);
             return view('admin.user.event', compact ('events'));    
         }
         elseif(auth()->user()->role_id == 1){
-            $events = Event::where('user_id',auth()->user()->id)->paginate(3);
+            $events = Event::where('user_id',auth()->user()->id)->paginate(20);
             return view('admin.user.event', compact ('events'));   
         }else{
             abort(403);
@@ -50,6 +52,7 @@ class EventController extends Controller
             'event_description' => $request->event_description,
             'event_place' => $request->event_place,
             'event_date' => $request->event_date,
+            'event_max' => $request->event_max,
             'user_id' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
@@ -81,10 +84,19 @@ class EventController extends Controller
 
    
     public function Edit($id){
-        
         $events = Event::find($id);
         $eventpic = EventPic::where('event_id',$id)->paginate(3);
-        return view('admin.user.event-manage' , compact('events' , 'eventpic')); 
+       
+        $joined = Join::join('users', 'join.user_id', '=', 'users.id')
+        ->where('join.event_id', $id)
+        ->get(['users.name' , 'users.matric_id' , 'users.email' ,'users.profile_photo_path', 'join.created_at',  'join.id AS join_id']);
+
+        // echo json_encode($joined);
+        // SELECT `join`.id , `users`.name ,`users`.id
+        // FROM `join` 
+        // INNER JOIN `users` ON `join`.user_id = `users`.id 
+        // WHERE `join`.event_id = '1' 
+        return view('admin.user.event-manage' , compact('events' , 'eventpic' , 'joined')); 
     }
     
     public function Update(Request $request,$id){
@@ -92,7 +104,8 @@ class EventController extends Controller
             'event_title' => $request->event_title,
             'event_description' => $request->event_description,
             'event_place' => $request->event_place,
-            'event_date' => $request->event_date
+            'event_date' => $request->event_date,
+            'event_max' => $request->event_max
         ]);
         return Redirect()->back()->with('success' , 'Event updated successfully!');
     }
@@ -117,6 +130,36 @@ class EventController extends Controller
             EventPic::find($id)->forceDelete();
         }
         return Redirect()->back()->with('successpic' , 'Picture deleted successfully!');
+    }
+
+    public function JoinEvent(Request $request){
+        $validatedData = $request->validate([
+            'event_id' => 'required',
+        ],
+        [
+            'event_id.required' => 'Please select event',
+        ]);
+
+        Join::insert([
+            'event_id' => $request->event_id,
+            'user_id' => Auth::user()->id,
+            'created_at' => Carbon::now(),
+        ]);
+                
+        return Redirect()->back()->with('success' , 'You have successfully register as participant!');
+    }
+
+    public function JoinCancel(Request $request){
+        $validatedData = $request->validate([
+            'event_id' => 'required',
+        ],
+        [
+            'event_id.required' => 'Please select event',
+        ]);
+
+        $delete = Join::where('event_id' , $request->event_id)->where('user_id', Auth::user()->id)->forceDelete();
+
+        return Redirect()->back()->with('success' , 'You have successfully cancel your participation!');
     }
     
     
@@ -150,4 +193,45 @@ class EventController extends Controller
         }
         return Redirect()->back()->with('successpic' , 'Picture uploaded successfully!');
     }  
+
+    public function EventJoined(){
+        if(Auth::user()->role_id == 2){
+            $launched = Event::whereDate('event_date', '<' , Carbon::today())->count();
+            $upcoming = Event::whereDate('event_date', '>' , Carbon::today())->count();
+            $totaluser = User::count();
+            $totaldonation = Donation::sum('amount');
+            $donator = Donation::latest()->paginate(20);
+            return view('admin.user.dashboard' , compact('launched' , 'upcoming' , 'totaldonation' , 'donator' ,'totaluser' ));
+        }else{
+            $joined = Join::join('events', 'join.event_id', '=', 'events.id')
+            ->where('join.user_id', Auth::user()->id)
+            ->get(['events.*']);
+
+        // SELECT `join`.id , `events`.event_title
+        // FROM `join` 
+        // INNER JOIN `events` ON `join`.event_id = `events`.id 
+        // WHERE `join`.user_id = '1' 
+        // echo json_encode($joined);
+        return view('admin.user.dashboard', compact ('joined'));  
+        }
+ 
+    }
+
+    public function KickUser(Request $request,$id){
+        $kick = Join::find($id)->forceDelete();
+        return Redirect()->back()->with('remove' , 'User successfully kicked from event.');
+
+    }
+
+    public function SearchEvent(Request $request){
+        $search = $request->search_event ;
+        
+            if(Auth::user()->role_id == '0'){
+                $events = Event::where('event_title' , 'like', '%' . $search . '%')->get();
+            }else{
+                $events = Event::where('event_title' , 'like', '%' . $search . '%')
+                ->where('user_id' , Auth::user()->id )->get();
+            }
+            return view('admin.user.searchevent', compact ('events'));    
+        }   
 }

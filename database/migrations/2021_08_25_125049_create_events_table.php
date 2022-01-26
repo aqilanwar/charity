@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('event_description');
             $table->string('event_place');
             $table->date('event_date');
+            $table->integer('event_max');
             $table->timestamps();
             $table->SoftDeletes();
         });

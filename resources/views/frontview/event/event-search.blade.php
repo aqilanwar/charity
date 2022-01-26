@@ -9,7 +9,7 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Upcoming Events</h2>
+          <h2>Search result for "{{$_GET['search_event']}}"</h2> <a class="btn btn-success" href="{{ url('/event') }}" class="btn btn-success">Show all event</a>
         </div>
 
       </div>
@@ -17,14 +17,20 @@
 
     <div class="container" style="min-height:90vh">
       <div class="container-fluid mt-100">
-          <form action="{{route('search.event.front')}}" method="GET">     
+        <form action="{{route('search.event.front')}}" method="GET">     
             <div class="input-group mb-3">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
-              </div>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
               <input type="text" class="form-control" name="search_event" placeholder="Search event title" aria-label="Search event title" aria-describedby="basic-addon2">
             </div>          
           </form>
+
+        @if(count($result) < 1)
+        <div class="card-body">
+            <p>No result.</p>
+        </div>
+        @else            
         <div class="card mb-3">
             <div class="card-header pl-0 pr-0">
                 <div class="row no-gutters w-100 align-items-center">
@@ -72,6 +78,7 @@
             {{-- End Event Div --}}
 
         </div>
+        @endif
       
     </div>
     </div>

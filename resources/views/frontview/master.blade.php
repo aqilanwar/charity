@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>IIUM CHARITY : : @yield('title')</title>
+  <title>STUDENT4CHARITY : : @yield('title')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="icon">
-  <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="apple-touch-icon">
+  <link href="{{asset('frontview/assets/img/mini-logo.png')}}" rel="icon">
+  <link href="{{asset('frontview/assets/img/mini-logo.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
@@ -24,10 +24,10 @@
   <link href="{{asset('frontview/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
   <link href="{{asset('frontview/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
   <link href="{{asset('frontview/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <!-- Template Main CSS File -->
   <link href="{{asset('frontview/assets/css/style.css')}}" rel="stylesheet">
+  @yield('scripts')
 </head>
 
 <body>
@@ -55,6 +55,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('frontview/assets/js/main.js')}}"></script>
+  @yield('js')
 
 </body>
 

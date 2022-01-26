@@ -44,9 +44,8 @@
                     </button>
                 </div>    
             @enderror
-            
             <h5 class="card-header d-flex justify-content-between align-items-center">
-                List of event organized
+                Search result for "{{$_GET['search_event']}}" <a href="{{ url('manage/event') }}"> Go back to all event </a> 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Create new event
@@ -134,9 +133,12 @@
                         </thead>
 
                         <tbody>
+                            @php
+                                $i = 1;   
+                            @endphp
                             @foreach($events as $event) 
                             <tr>
-                                <td>{{$events->firstItem()+$loop->index}}</td>
+                                <td>{{$i++}}</td>
                                 <td> <a href="../event/{{$event->id}}">{{$event->event_title}}</a> </td>
                                 
                                 <td>
@@ -170,9 +172,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="card-footer">
-                        {{ $events->links("pagination::bootstrap-4") }}
-                    </div>
                 </div>
             </div>
             @endif
@@ -214,3 +213,4 @@
 
     </script> 
 @endsection
+

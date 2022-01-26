@@ -1,16 +1,13 @@
 @extends('admin.index')
 @section('title' , 'Manage Event')
-
 @section('content')
     
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Manage Event</h1>
-        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-            For more information about DataTables, please visit the <a target="_blank"
-                href="https://datatables.net">official DataTables documentation</a>.</p>
+        <h5 class="h5 mb-2 text-gray-800">Manage Event / <a href="../../event/{{$events->id}}" >{{ $events->event_title}}</a> </h5>
+
         
         <!-- DataTales Example -->
         <div class="row">
@@ -54,25 +51,30 @@
                         <form action="{{ url('event/update/'.$events->id)}}" method="POST" >
                             @csrf
                             <div class="form-group">
-                              <label for="exampleFormControlInput1">Event title</label>
-                              <input type="text" name="event_title" class="form-control" id="exampleFormControlInput1" value="{{$events->event_title}}">
+                              <label for="event_title">Event title</label>
+                              <input type="text" name="event_title" class="form-control" id="event_title" value="{{$events->event_title}}">
                             </div>
                             @error('event_title')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                             <div class="form-group">
-                              <label for="exampleFormControlTextarea1">Event description</label>
-                              <textarea class="form-control" name="event_description" id="exampleFormControlTextarea1" rows="3" >{{$events->event_description}}</textarea>
+                              <label for="event_description">Event description</label>
+                              <textarea class="form-control" name="event_description" id="event_description" rows="3" >{{$events->event_description}}</textarea>
                             </div>
 
                             <div class="form-group">
-                              <label for="exampleFormControlTextarea1">Event place</label>
-                              <input type="text" name="event_place" class="form-control" id="exampleFormControlInput1" value="{{$events->event_place}}">
+                              <label for="event_place">Event place</label>
+                              <input type="text" name="event_place" class="form-control" id="event_place" value="{{$events->event_place}}">
                             </div>
 
                             <div class="form-group">
-                                <label for="Event Date" class="form-label">Event Date</label>
-                                <input type="date" id="demo" class="form-control" value="{{$events->event_date}}" name="event_date" id="event_date" required>
+                                <label for="event_date" class="form-label">Event date</label>
+                                <input type="date" class="form-control" value="{{ date('Y-m-d', strtotime($events->event_date)) }}" name="event_date" id="event_date" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event_max" class="form-label">Maximum participant</label>
+                                <input type="number" class="form-control" value="{{ $events->event_max }}" name="event_max" id="event_max" readonly>
                             </div>
                     </div>
                     <div class="card-footer">
@@ -188,79 +190,108 @@
         </div>
         
         <div class="card shadow mb-4">
-
+            @if(session('remove')) 
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{session('remove')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>    
+            @endif
             <h5 class="card-header d-flex justify-content-between align-items-center">
                 List of people that join the event
                 <!-- Button trigger modal -->
             </h5>
-            <br>
-            <form class="d-none d-sm-inline-block form-inline mr-auto ml-lg-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+ 
+            @if($joined->isEmpty())
+            <div class="card-body">
+                No participant.
+            </div>
+            @else
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Event Title</th>
-                                <th>Event Date</th>
-                                <th>Created At</th>
-                                <th>Created By</th>
+                                <th>Participant Name</th>
+                                <th>Matric ID</th>
+                                <th>Email</th>
+                                <th>Date of participation</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
+                        @php
+                            $i = 1 ;   
+                        @endphp
                         <tbody>
-                            {{-- @foreach($events as $event) 
+                            @foreach($joined as $join) 
                             <tr>
-                                <td>{{$events->firstItem()+$loop->index}}</td>
-                                <td>{{$event->event_title}}</td>
-                                <td>{{$event->event_date}}</td>
-                                <td>{{$event->created_at->diffForHumans()}}</td>
-                                <td>                                    
-                                @if($event->user->profile_photo_path == null)
-                                    <img style="height: 2rem;width: 2rem;border-radius: 50%;" src="/storage/profile-photos/default.png " alt="">{{$event->user->name}}
+                                <td>{{$i++}}</td>
+                                <td>
+                                    @if($join->profile_photo_path == null)
+                                    <img style="height: 2rem;width: 2rem;border-radius: 50%;" src="/storage/profile-photos/default.png " alt="">{{$join->name}}
                                 @else 
-                                    <img style="height: 2rem;width: 2rem;border-radius: 50%;" src="/storage/{{$event->user->profile_photo_path}} " alt="">{{$event->user->name}}
+                                    <img style="height: 2rem;width: 2rem;border-radius: 50%;" src="/storage/{{$join->profile_photo_path}} " alt="">{{$join->name}}
                                 @endif
                                 </td>
+                                <td>{{$join->matric_id}}</td>
+                                <td>{{$join->email}}</td>
+                                <td>{{ Carbon\Carbon::parse($join->event_date)->format('d M Y' ) }}</td>
                                 <td>
-                                    <a href="{{ url('event/edit/'.$event->id)}}" class="btn btn-primary btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                                        <span class="text">Manage Event</span>
-                                    </a>
-                                    <a href="{{ url('event/delete/'.$event->id)}}" class="btn btn-danger btn-icon-split">
+                                    <a href="{{ url('event/kick/'.$join->join_id)}}" class="btn btn-danger btn-icon-split delete-confirm">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>
-                                        <span class="text">Delete Event</span>
+                                        <span class="text">Remove from event</span>
                                     </a>
                                 </td>
                             </tr>
 
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
-                        <div class="card-footer">
-
-                        </div>
                     </table>
                 </div>
-            </div>
+            </div>                
+            @endif
+
 
         </div>
-    <!-- /.container-fluid -->
+    <!-- /      .container-fluid -->
 
 </div>
 
 @endsection
+@section('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script src="{{asset('backend/js/ck-editor.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      $( document ).ready(function() {
+
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+
+            swal.fire({
+                    title: "Are you sure to remove this user from event ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, remove user from event",
+                }).then(function (result){
+                    if(result.value === true){
+                    console.log("Submitted");
+                    window.location.href = url;
+                }
+            })
+        })
+    });
+
+    </script> 
+@endsection
+
+

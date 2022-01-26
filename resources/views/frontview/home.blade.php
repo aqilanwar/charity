@@ -5,21 +5,22 @@
   <!-- ======= hero Section ======= -->
   <section id="hero">
     <div class="hero-content" data-aos="fade-up">
-      <h2>We rise by lifting <br>others!<span style=" font-style: italic;">#IIUMCare</span> </h2>
+      <h2 style="font-size : 39px">"When a person dies, all their deeds end except three:<br>
+       a continuing charity, beneficial knowledge and a child who prays for them." <br> (Hadith, Muslim). 
+        <br><span style=" font-style: italic;">#STUDENT4CHARITY</span> </h2>
 
       <div>
         <a href="{{route('list.event')}}" class="btn-get-started scrollto">Join Upcoming Charity Events</a>
-        <a href="#portfolio" class="btn-projects scrollto">Donate</a>
+        <a href="{{url('/donation')}}" class="btn-projects scrollto">Donate</a>
       </div>
     </div>
 
     <div class="hero-slider swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/1.jpg');" loading="lazy"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/2.jpg');" loading="lazy"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/3.jpg');" loading="lazy"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/4.jpg');" loading="lazy"></div>
-        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/5.jpg');" loading="lazy"></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/2.jpg');" ></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/3.jpg');" ></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/4.jpg');" ></div>
+        <div class="swiper-slide" style="background-image: url('frontview/assets/img/hero-carousel/1.jpg');" ></div>
       </div>
     </div>
 
@@ -31,17 +32,18 @@
       <div class="container" data-aos="fade-up">
         <div class="row">
           <div class="col-lg-6 about-img">
-            <img src="{{asset('frontview/assets/img/about-img.png')}}" loading="lazy" alt="">
+            <img src="{{asset('frontview/assets/img/about-img.png')}}"alt="">
           </div>
 
           <div class="col-lg-6 content">
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing</h2>
-            <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+            <h2>How can i participate <br> as a volunteer ?</h2>
+            <h3>" Good hearts comes with a good deeds !"</h3>  
 
             <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+              <li><i class="bi bi-check-circle"></i> Register a new account</li>
+              <li><i class="bi bi-check-circle"></i> Choose the available event from the list</li>
+              <li><i class="bi bi-check-circle"></i> Submit your participation as a volunteer</li>
+              <li><i class="bi bi-check-circle"></i> Show up yourself at the respective place during the event date!</li>
             </ul>
 
           </div>
@@ -50,59 +52,103 @@
       </div>
     </section><!-- End About Section -->
 
-
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials">
+    <!-- ======= Services Section ======= -->
+    <section id="services">
       <div class="container" data-aos="fade-up">
         <div class="section-header">
-          <h2>UPCOMING EVENTS</h2>
-          <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum velit export irure minim illum fore</p>
+          <h2>Why you should join us</h2>
+          <h5>Charity is important because it raises awareness of issues and gives donors the power to do something about them.</h5>
         </div>
 
-        <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-            @foreach($result as $event)
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                @foreach ($event->eventpic as $pic)
-                @endforeach
-                <img src="{{$pic->photo_path}}" class="img-fluid" alt="">
-                <h3 class="text-left">{{$event->event_title}}</h3>
-                <h4 class="text-left" style="text-overflow: ellipsis;">
-                  {{$event->event_date->diffForHumans()}}
-                </h4>
-                <div class="mt-3">
-                  <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <div class="mt-1"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
-                </div>
-                <div class="mt-1">
-                  <a href="{{url('event/'.$event->id)}}" class="btn btn-primary btn-block">View Event</a>
-                </div>
-              </div>
+        <div class="row gy-4">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="box">
+              <div class="icon"><i class="bi bi-briefcase"></i></div>
+              <h4 class="title"><a href="">Giving to charity strengthens personal values</a></h4>
+              <p class="description">Having the power to improve the lives of others is, to many people, a privilege, and one that comes with its own sense of obligation. Acting on these powerful feelings of responsibility is a great way to reinforce our own personal values and feel like we’re living in a way that is true to our own ethical beliefs.</p>
             </div>
-            @endforeach
-            <!-- End charity event -->
           </div>
 
-          <div class="swiper-pagination"></div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="box">
+              <div class="icon"><i class="bi bi-card-checklist"></i></div>
+              <h4 class="title"><a href="">Everything is well organized</a></h4>
+              <p class="description">Student4Charity allow student from IIUM to organize and manage a charity event. Every event will be managed and controlled by the responsible organizer team.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="box">
+              <div class="icon"><i class="bi bi-bar-chart"></i></div>
+              <h4 class="title"><a href="">You raise awareness through charity </a></h4>
+              <p class="description">?</p>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="box">
+              <div class="icon"><i class="bi bi-binoculars"></i></div>
+              <h4 class="title"><a href="">Explore, make friends and gain new experience</a></h4>
+              <p class="description">While some people are naturally outgoing, others are shy and have a hard time meeting new people. Volunteering gives you the opportunity to practice and develop your social skills, since you are meeting regularly with a group of people with common interests. Once you have momentum, it’s easier to branch out and make more friends and contacts.</p>
+            </div>
+          </div>
+
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section><!-- End Services Section -->
+
+
+ <!-- ======= Contact Section ======= -->
+ <section id="contact">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <h2>Contact Us</h2>
+      <h4>Stay updated with the latest charity event from us by following our social media.</h4>
+    </div>
+
+    <div class="row contact-info">
+
+      <div class="col-md-4">
+        <div class="contact-address">
+          <i class="bi bi-facebook text-primary"></i>
+          <h3><a href="https://www.facebook.com/StudentXCharity" target="_blank">Facebook</a></h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="contact-phone">
+          <i class="bi bi-twitter text-primary"></i>
+          <h3><a href="https://twitter.com/studentxcharity" target="_blank">Twitter</a></h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="contact-email">
+          <i class="bi bi-envelope text-primary"></i>
+          <h3><a href="mailto:student4charity@gmail.com">Email : student4charity@gmail.com</a></h3>
+          <p></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section><!-- End Contact Section -->
+
 
     <!-- ======= Call To Action Section ======= -->
     <section id="call-to-action">
       <div class="container" data-aos="zoom-out">
         <div class="row">
           <div class="col-lg-9 text-center text-lg-start">
-            <h3 class="cta-title">Call To Action</h3>
-            <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h3 class="cta-title">You can make a difference.</h3>
+            <p class="cta-text"> 
+              Student4Charity connects every student in IIUM. We help fellow nonprofits access the funding, tools, training, and support they need to serve their communities.
+            </p>
           </div>
           <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">Call To Action</a>
+            <a class="cta-btn align-middle" href=" {{url('/register')}} ">Sign Up Now</a>
           </div>
         </div>
       </div>

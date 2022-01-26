@@ -1,64 +1,67 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+@extends('frontview.master')
+@section('title', 'Register')
 
-        <x-jet-validation-errors class="mb-4" />
+@section('content')
+    
+<main id="main">
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Register</h2>
+        </div>
 
-            <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+      </div>
+    </section><!-- End Breadcrumbs Section -->
 
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-            <div class="mt-4">
-                <x-jet-label for="matric_id" value="{{ __('Matric ID') }}" />
-                <x-jet-input id="matric_id" class="block mt-1 w-full" type="text" name="matric_id" :value="old('matric_id')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jet-label for="terms">
-                        <div class="flex items-center">
-                            <x-jet-checkbox name="terms" id="terms"/>
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-jet-label>
+    <div class="col-sm-9 col-md-7 col-lg-4 mx-auto" style="min-height: 79vh">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+           <img src="{{asset('frontview/assets/img/logo-3.png')}}" class="img-fluid" style="margin:10px" height="90px" alt="logo">
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
                 </div>
             @endif
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Muhammad Akmal" name="name" value="{{old('name')}}" required >
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email" value="{{old('email')}}" required >
+                    <label for="email">Email address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="matric_id" id="matric_id" value="{{old('matric_id')}}" required  placeholder="100010001000">
+                    <label for="matric_id">Matric ID</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control"  name="password"  id="password" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="password_confirmation"  id="password_confirmation" placeholder="Confirm Password">
+                    <label for="password_confirmation">Confirm Password</label>
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+                <div class="form-floating mb-3">
+                    Already register ? 
+                    <a class="text-primary " href="{{ route('login') }}">Login here</a>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-primary btn-login " type="submit">Sign up</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  
 
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+  </main><!-- End #main -->
+
+  @endsection

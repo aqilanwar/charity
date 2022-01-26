@@ -10,10 +10,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>IIUM CHARITY : : @yield('title')</title>
+    <title>STUDENT4CHARITY : : @yield('title')</title>
     <!-- Favicons -->
-    <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="icon">
-    <link href="{{asset('frontview/assets/img/logo-3.png')}}" rel="apple-touch-icon">
+    <link href="{{asset('frontview/assets/img/mini-logo.png')}}" rel="icon">
+    <link href="{{asset('frontview/assets/img/mini-logo.png')}}" rel="apple-touch-icon">
     <!-- Custom fonts for this template-->
     <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
@@ -26,7 +26,6 @@
         
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.2/datatables.min.css"/>
     
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.2/datatables.min.js"></script>
 
 
 </head>
@@ -52,7 +51,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; IIUM CHARITY 2021</span>
+                        <span>Copyright &copy; STUDENT4CHARITY 2022</span>
                     </div>
                 </div>
             </footer>
@@ -88,7 +87,7 @@
             </div>
         </div>
     </div>
-
+    @yield('scripts')
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('backend/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -99,13 +98,8 @@
     <!-- Custom scripts for all pages-->
     <script src="{{asset('backend/js/sb-admin-2.min.js')}}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{asset('backend/vendor/chart.js/Chart.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{asset('backend/js/demo/chart-pie-demo.js')}}"></script>
-    <script src="{{asset('backend/js/datepicker.js')}}"></script>
 </body>
+
+
 
 </html>
